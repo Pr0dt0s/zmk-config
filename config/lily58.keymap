@@ -13,19 +13,24 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_cut {
-            bindings = <&kp K_CUT>;
+        combo_undo {
+            bindings = <&kp LC(Z)>;
             key-positions = <37 38>;
         };
 
-        combo_copy {
-            bindings = <&kp K_COPY>;
+        combo_cut {
+            bindings = <&kp LC(X)>;
             key-positions = <38 39>;
         };
 
+        combo_copy {
+            bindings = <&kp LC(C)>;
+            key-positions = <39 40>;
+        };
+
         combo_paste {
-            bindings = <&kp K_PASTE>;
-            key-positions = <40 39>;
+            bindings = <&kp LC(V)>;
+            key-positions = <40 41>;
         };
     };
 
