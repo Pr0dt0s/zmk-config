@@ -112,3 +112,7 @@
         };
     };
 };
+
+&led_strip {
+    chain-length = <6>;
+};
