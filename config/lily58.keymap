@@ -107,7 +107,7 @@
         Mouse {
             bindings = <
 &trans  &trans        &trans           &trans           &trans           &trans                                &trans  &trans          &trans          &trans           &trans  &rgb_ug RGB_TOG
-&trans  &bl BL_CYCLE  &rgb_ug RGB_SPI  &rgb_ug RGB_BRD  &rgb_ug RGB_BRD  &trans                                &trans  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN   &trans  &trans
+&trans  &bl BL_CYCLE  &rgb_ug RGB_SPI  &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &trans                                &trans  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN   &trans  &trans
 &trans  &bl BL_INC    &rgb_ug RGB_SPD  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &trans                                &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
 &trans  &bl BL_DEC    &bl BL_TOG       &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &trans  &rgb_ug RGB_EFF    &trans     &trans  &trans          &trans          &trans           &trans  &trans
                                        &trans           &trans           &trans  &mkp LCLK          &mkp RCLK  &trans  &trans          &trans
