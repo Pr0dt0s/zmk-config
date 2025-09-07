@@ -26,4 +26,4 @@ include:
     shield: lily58_right
     # snippet: zmk-usb-logging
   - board: nice_nano_v2
-    shield: central # New central/dongle
+    shield: central_dongle # New central/dongle
