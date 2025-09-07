@@ -8,6 +8,8 @@ west build -d /build/left -p -b "nice_nano_v2" -s /zmk-config/zmk/app -- -DSHIEL
 
 west build -d /build/right -p -b "nice_nano_v2" -s /zmk-config/zmk/app -- -DSHIELD="lily58_right" -DZMK_CONFIG="/zmk-config/config"
 
+west build -d /build/central -p -b "nice_nano_v2" -s /zmk-config/zmk/app -- -DSHIELD="central" -DZMK_CONFIG="/zmk-config/config"
+
 west build -d /build/settings_reset -p -b "nice_nano_v2" -s /zmk-config/zmk/app -- -DSHIELD="settings_reset" -DZMK_CONFIG="/zmk-config/config"
 
 cp /build/left/zephyr/zmk.uf2 /out/lily58_left.uf2 && cp /build/right/zephyr/zmk.uf2 /out/lily58_right.uf2 && cp /build/settings_reset/zephyr/zmk.uf2 /out/settings_reset.uf2

@@ -1,2 +1,4 @@
 out
 zephyr/**/*
+./zmk
+./zephyr
