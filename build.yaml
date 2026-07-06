@@ -19,7 +19,7 @@
 #
 ---
 include:
-  - board: nice_nano_v2
+  - board: nice_nano_v2//zmk
     shield: lily58_left
-  - board: nice_nano_v2
+  - board: nice_nano_v2//zmk
     shield: lily58_right
