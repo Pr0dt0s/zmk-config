@@ -1,0 +1,69 @@
+#include <dt-bindings/zmk/vfx.h>
+#include <vfx/presets.dtsi>
+
+/*
+ * PandaKB Lily58 MX RGB underglow on nice_nano, left half.
+ *
+ * Filename matters: ZMK looks for <shield>_<board>.overlay or
+ * <shield>.overlay, so this has to be lily58_left.overlay to be applied at
+ * all. The right half is the same but for strip-offset.
+ */
+
+&pinctrl {
+    spi3_default: spi3_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+        };
+    };
+
+    spi3_sleep: spi3_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+            low-power-enable;
+        };
+    };
+};
+
+&spi3 {
+    compatible = "nordic,nrf-spim";
+    status = "okay";
+
+    pinctrl-0 = <&spi3_default>;
+    pinctrl-1 = <&spi3_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    led_strip: ws2812@0 {
+        compatible = "worldsemi,ws2812-spi";
+        label = "WS2812";
+
+        /* SPI */
+        reg = <0>; /* required for SPI bindings */
+        spi-max-frequency = <4000000>;
+
+        /* WS2812 */
+        chain-length = <36>;
+        spi-one-frame = <0x70>;
+        spi-zero-frame = <0x40>;
+        color-mapping = <1 0 2>;
+    };
+};
+
+/ {
+    chosen {
+        zmk,underglow = &led_strip;
+    };
+
+    /* Effects are positioned across the whole keyboard, so each half renders
+     * its own slice of a 72 pixel space and gradients carry across the seam.
+     * The left half starts at 0; the right half starts at 36.
+     */
+    vfx_engine: vfx_engine {
+        compatible = "zmk,vfx-engine";
+        status = "okay";
+
+        virtual-length = <72>;
+        strip-offset = <0>;
+
+        default-scene = <&vfx_aurora>;
+    };
+};

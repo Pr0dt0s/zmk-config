@@ -1,6 +1,12 @@
+#include <dt-bindings/zmk/vfx.h>
+#include <vfx/presets.dtsi>
+
 /*
- * PandaKB Lily58 MX RGB underglow on nice_nano.
- * Uses SPI3 MOSI on P0.06 for WS2812 data.
+ * PandaKB Lily58 MX RGB underglow on nice_nano, right half.
+ *
+ * Filename matters: ZMK looks for <shield>_<board>.overlay or
+ * <shield>.overlay, so this has to be lily58_left.overlay to be applied at
+ * all. The right half is the same but for strip-offset.
  */
 
 &pinctrl {
@@ -45,5 +51,19 @@
 / {
     chosen {
         zmk,underglow = &led_strip;
+    };
+
+    /* Effects are positioned across the whole keyboard, so each half renders
+     * its own slice of a 72 pixel space and gradients carry across the seam.
+     * The left half starts at 0; the right half starts at 36.
+     */
+    vfx_engine: vfx_engine {
+        compatible = "zmk,vfx-engine";
+        status = "okay";
+
+        virtual-length = <72>;
+        strip-offset = <36>;
+
+        default-scene = <&vfx_aurora>;
     };
 };

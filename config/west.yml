@@ -2,12 +2,18 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    # Additional modules containing boards/shields/custom code can be listed here as well
-    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
+    - name: pr0dt0s
+      url-base: https://github.com/pr0dt0s
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    # Advanced underglow effects. Replaces ZMK's built-in underglow, which
+    # cannot be extended from a module: its effects are a fixed switch with
+    # file-static state.
+    - name: zmk-advanced-underglow-effects-vfx
+      remote: pr0dt0s
+      revision: claude/zealous-planck-dykzeh
   self:
     path: config
