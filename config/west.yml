@@ -13,11 +13,9 @@ manifest:
     # cannot be extended from a module: its effects are a fixed switch with
     # file-static state.
     #
-    # NOTE: west clones this anonymously, and ZMK's reusable build workflow
-    # takes no credentials, so a GitHub Actions build of this config needs the
-    # module repository to be public. Local builds are unaffected, and the
-    # module's own CI builds the firmware from a local checkout, so the code
-    # is still verified either way.
+    # The module repository has to stay public: west clones it anonymously and
+    # ZMK's reusable build workflow takes no credentials, so an Actions build
+    # of this config cannot reach a private one.
     - name: zmk-advanced-underglow-effects-vfx
       remote: pr0dt0s
       revision: claude/zealous-planck-dykzeh
