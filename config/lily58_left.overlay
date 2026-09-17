@@ -1,4 +1,5 @@
 #include <dt-bindings/zmk/vfx.h>
+#include <vfx/lily58-positions.dtsi>
 #include <vfx/presets.dtsi>
 
 /*
@@ -63,6 +64,15 @@
 
         virtual-length = <72>;
         strip-offset = <0>;
+
+        /* Where each LED physically sits. Without it the engine only knows
+         * a pixel's place on the wire, so ripples spread to whatever is
+         * adjacent on the strip rather than outward across the board.
+         *
+         * Derived from the key layout, not measured from your build: if
+         * ripples come out the wrong shape, correct this list.
+         */
+        pixel-positions = <VFX_LILY58_POSITIONS>;
 
         default-scene = <&vfx_aurora>;
     };
