@@ -117,8 +117,11 @@
         };
 
         Mouse {
+            // DIAGNOSTIC: &vfx VFX_SEL(17) jumps to the pixel-sweep (probe 0);
+            // &vfx VFX_SEL(53) jumps to the solid red/green/blue color checks.
+            // Remove both once vfx-probe.dtsi is deleted.
             bindings = <
-&trans  &trans        &trans           &trans           &trans           &trans                                &trans  &trans          &trans          &trans           &trans  &vfx VFX_TOG
+&vfx VFX_SEL(17)  &vfx VFX_SEL(53)  &trans           &trans           &trans           &trans                                &trans  &trans          &trans          &trans           &trans  &vfx VFX_TOG
 &trans  &bl BL_CYCLE  &vfx VFX_SPI     &vfx VFX_BRD     &vfx VFX_BRI     &trans                                &trans  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN   &trans  &trans
 &trans  &bl BL_INC    &vfx VFX_SPD     &vfx VFX_HUD     &vfx VFX_HUI     &trans                                &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
 &trans  &bl BL_DEC    &bl BL_TOG       &vfx VFX_PREV    &vfx VFX_NEXT    &trans  &rgb_ug RGB_EFF    &trans     &trans  &trans          &trans          &trans           &trans  &trans

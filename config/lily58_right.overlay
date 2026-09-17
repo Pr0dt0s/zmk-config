@@ -1,6 +1,7 @@
 #include <dt-bindings/zmk/vfx.h>
 #include <vfx/lily58-positions.dtsi>
 #include <vfx/presets.dtsi>
+#include "vfx-probe.dtsi"
 
 /*
  * PandaKB Lily58 MX RGB underglow on nice_nano, right half.
