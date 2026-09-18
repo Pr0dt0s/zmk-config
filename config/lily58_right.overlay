@@ -1,5 +1,5 @@
 #include <dt-bindings/zmk/vfx.h>
-#include <vfx/lily58-positions.dtsi>
+#include <vfx/pandakb-lily58.dtsi>
 #include <vfx/presets.dtsi>
 #include "vfx-probe.dtsi"
 
@@ -43,7 +43,7 @@
         spi-max-frequency = <4000000>;
 
         /* WS2812 */
-        chain-length = <36>;
+        chain-length = <35>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <1 0 2>;
@@ -56,24 +56,26 @@
     };
 
     /* Effects are positioned across the whole keyboard, so each half renders
-     * its own slice of a 72 pixel space and gradients carry across the seam.
-     * The left half starts at 0; the right half starts at 36.
+     * its own slice of a 70 pixel space and gradients carry across the seam.
+     * The left half starts at 0; the right half starts at 35.
      */
     vfx_engine: vfx_engine {
         compatible = "zmk,vfx-engine";
         status = "okay";
 
-        virtual-length = <72>;
-        strip-offset = <36>;
+        virtual-length = <70>;
+        strip-offset = <35>;
 
-        /* Where each LED physically sits. Without it the engine only knows
-         * a pixel's place on the wire, so ripples spread to whatever is
-         * adjacent on the strip rather than outward across the board.
-         *
-         * Derived from the key layout, not measured from your build: if
-         * ripples come out the wrong shape, correct this list.
+        /* This board chains 6 downward-facing underglow LEDs before its 29
+         * per-key ones, so neither the positions nor the key map follow the
+         * plain 6x6 grid the generic Lily58 list assumes.
          */
-        pixel-positions = <VFX_LILY58_POSITIONS>;
+        pixel-positions = <VFX_PANDAKB_LILY58_POSITIONS>;
+
+        /* Without this a ripple starts at whatever pixel shares a number with
+         * the key position, which is why pressing N lit the LED under 9.
+         */
+        key-pixels = <VFX_PANDAKB_LILY58_KEY_PIXELS>;
 
         default-scene = <&vfx_aurora>;
     };
