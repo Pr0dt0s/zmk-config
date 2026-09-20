@@ -45,7 +45,12 @@
         chain-length = <35>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
-        color-mapping = <1 0 2>;
+        /* GREEN RED BLUE, the order SK6812 takes its bytes in. These are
+         * Zephyr's LED_COLOR_ID values, where 0 is WHITE and red starts at 1,
+         * so the old <1 0 2> read as RED WHITE GREEN: it fed the chip's red
+         * line a constant 0 and never sent blue at all.
+         */
+        color-mapping = <2 1 3>;
     };
 };
 
