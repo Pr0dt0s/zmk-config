@@ -95,14 +95,17 @@
             compatible = "zmk,vfx-channel";
             range = <0 6>;
 
-            /* Ambient only. The reactive and indicator scenes have nothing to
-             * say on six downward-facing LEDs.
+            /* Reactive here means reacting to a press at all, not to where it
+             * landed: these pixels sit behind the board, so the ones that aim
+             * at a key have nothing to say on them. Nor do the indicators,
+             * which need more than six pixels to read.
              */
-            scenes = <&vfx_breathe &vfx_solid_warm &vfx_aurora &vfx_rainbow &vfx_plasma
+            scenes = <&vfx_glow_pulse &vfx_pulse
+                      &vfx_breathe &vfx_solid_warm &vfx_aurora &vfx_rainbow &vfx_plasma
                       &vfx_ember
                       &vfx_probe_00 &vfx_probe_01 &vfx_probe_02
                       &vfx_probe_03 &vfx_probe_04 &vfx_probe_05>;
-            default-scene = <&vfx_breathe>;
+            default-scene = <&vfx_glow_pulse>;
         };
 
         keys: channel-keys {
