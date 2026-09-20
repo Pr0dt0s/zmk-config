@@ -1,6 +1,12 @@
 #include <dt-bindings/zmk/vfx.h>
 #include <vfx/pandakb-lily58.dtsi>
 #include <vfx/presets.dtsi>
+/* Both halves have to declare the same scenes in the same order, even though
+ * only the right one has working LEDs to show them on. Next/previous are
+ * resolved to an absolute index on the central and relayed, so a half that
+ * knows fewer scenes silently clamps what the other half can ever reach.
+ */
+#include "vfx-probe.dtsi"
 
 /*
  * PandaKB Lily58 MX RGB underglow on nice_nano, left half.
