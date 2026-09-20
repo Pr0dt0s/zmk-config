@@ -87,6 +87,31 @@
          */
         key-pixels = <VFX_PANDAKB_LILY58_KEY_PIXELS>;
 
-        default-scene = <&vfx_aurora>;
+        /* Must stay identical to the right half's, for the same reason the
+         * scene list does: relative commands are resolved to an index here,
+         * on the central, and relayed as a number.
+         */
+        glow: channel-glow {
+            compatible = "zmk,vfx-channel";
+            range = <0 6>;
+
+            scenes = <&vfx_breathe &vfx_solid_warm &vfx_aurora &vfx_rainbow &vfx_plasma
+                      &vfx_ember
+                      &vfx_probe_00 &vfx_probe_01 &vfx_probe_02
+                      &vfx_probe_03 &vfx_probe_04 &vfx_probe_05>;
+            default-scene = <&vfx_breathe>;
+        };
+
+        keys: channel-keys {
+            compatible = "zmk,vfx-channel";
+            range = <6 29>;
+
+            scenes = <&vfx_aurora &vfx_rainbow &vfx_breathe &vfx_plasma &vfx_twinkle
+                      &vfx_reactive &vfx_water &vfx_water_keys &vfx_matrix &vfx_matrix_keys
+                      &vfx_pinwheel &vfx_fire &vfx_beacons &vfx_crosshair &vfx_ember
+                      &vfx_status &vfx_solid_warm
+                      &vfx_color_bars>;
+            default-scene = <&vfx_aurora>;
+        };
     };
 };

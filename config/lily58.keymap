@@ -14,9 +14,14 @@
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/modifiers.h>
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/vfx.h>
+
+/* Channel ids are positions in the overlay's channel list, glow first. */
+#define VFX_CH_GLOW 0
+#define VFX_CH_KEYS 1
 
 / {
     combos {
@@ -40,6 +45,76 @@
         combo_paste {
             bindings = <&kp LC(V)>;
             key-positions = <40 41>;
+        };
+    };
+
+    /* One key per control rather than two, with right shift choosing which
+     * part of the strip it lands on. Right rather than either shift: the
+     * Mouse layer is held with the left pinky and every VFX key is left hand,
+     * so a left shift chord would need three fingers on one hand.
+     */
+    behaviors {
+        vfx_tog_ch: vfx_tog_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_TOG_ON(VFX_CH_KEYS)>, <&vfx VFX_TOG_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_next_ch: vfx_next_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_NEXT_ON(VFX_CH_KEYS)>, <&vfx VFX_NEXT_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_prev_ch: vfx_prev_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_PREV_ON(VFX_CH_KEYS)>, <&vfx VFX_PREV_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_bri_ch: vfx_bri_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_BRI_ON(VFX_CH_KEYS)>, <&vfx VFX_BRI_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_brd_ch: vfx_brd_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_BRD_ON(VFX_CH_KEYS)>, <&vfx VFX_BRD_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_hui_ch: vfx_hui_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_HUI_ON(VFX_CH_KEYS)>, <&vfx VFX_HUI_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_hud_ch: vfx_hud_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_HUD_ON(VFX_CH_KEYS)>, <&vfx VFX_HUD_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_spi_ch: vfx_spi_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_SPI_ON(VFX_CH_KEYS)>, <&vfx VFX_SPI_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
+        };
+
+        vfx_spd_ch: vfx_spd_ch {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&vfx VFX_SPD_ON(VFX_CH_KEYS)>, <&vfx VFX_SPD_ON(VFX_CH_GLOW)>;
+            mods = <MOD_RSFT>;
         };
     };
 
@@ -117,16 +192,19 @@
         };
 
         Mouse {
-            // Position 0 is the &lt 4 key that reaches this layer, so it is held
-            // down the whole time and cannot also be pressed. Diagnostics live
-            // on 1/2/3 instead: pixel sweep, colour checks, and hue back to
-            // neutral. Remove them once vfx-probe.dtsi is deleted.
+            // Every VFX key drives the per-key channel on its own and the
+            // underglow with right shift held. Position 0 is the &lt 4 that
+            // reaches this layer, so it is held down throughout and can never
+            // register a press of its own: nothing useful goes there.
+            //
+            // Key 1 resets the hue to neutral, which the colour-bar scene
+            // needs to be read honestly. It can go with vfx-probe.dtsi.
             bindings = <
-&trans  &vfx VFX_SEL(17)  &vfx VFX_SEL(53)  &vfx VFX_SET_HUE(0)  &trans  &trans                                &trans  &trans          &trans          &trans           &trans  &vfx VFX_TOG
-&trans  &bl BL_CYCLE  &vfx VFX_SPI     &vfx VFX_BRD     &vfx VFX_BRI     &trans                                &trans  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN   &trans  &trans
-&trans  &bl BL_INC    &vfx VFX_SPD     &vfx VFX_HUD     &vfx VFX_HUI     &trans                                &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
-&trans  &bl BL_DEC    &bl BL_TOG       &vfx VFX_PREV    &vfx VFX_NEXT    &trans  &rgb_ug RGB_EFF    &trans     &trans  &trans          &trans          &trans           &trans  &trans
-                                       &trans           &trans           &trans  &mkp LCLK          &mkp RCLK  &trans  &trans          &trans
+&trans  &vfx VFX_SET_HUE(0)  &trans        &trans        &trans        &trans                                &trans  &trans          &trans          &trans           &trans  &vfx_tog_ch
+&trans  &bl BL_CYCLE         &vfx_spi_ch   &vfx_brd_ch   &vfx_bri_ch   &trans                                &trans  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN   &trans  &trans
+&trans  &bl BL_INC           &vfx_spd_ch   &vfx_hud_ch   &vfx_hui_ch   &trans                                &trans  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
+&trans  &bl BL_DEC           &bl BL_TOG    &vfx_prev_ch  &vfx_next_ch  &trans  &rgb_ug RGB_EFF    &trans     &trans  &trans          &trans          &trans           &trans  &trans
+                                           &trans        &trans        &trans  &mkp LCLK          &mkp RCLK  &trans  &trans          &trans
             >;
         };
     };
