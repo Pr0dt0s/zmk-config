@@ -100,7 +100,7 @@
              * at a key have nothing to say on them. Nor do the indicators,
              * which need more than six pixels to read.
              */
-            scenes = <&vfx_glow_pulse &vfx_pulse
+            scenes = <&vfx_glow_pulse &vfx_pulse &vfx_darts &vfx_static
                       &vfx_breathe &vfx_solid_warm &vfx_aurora &vfx_rainbow &vfx_plasma
                       &vfx_ember
                       &vfx_probe_00 &vfx_probe_01 &vfx_probe_02
@@ -115,6 +115,7 @@
             scenes = <&vfx_aurora &vfx_rainbow &vfx_breathe &vfx_plasma &vfx_twinkle
                       &vfx_reactive &vfx_water &vfx_water_keys &vfx_matrix &vfx_matrix_keys
                       &vfx_pinwheel &vfx_fire &vfx_beacons &vfx_crosshair &vfx_ember
+                      &vfx_held &vfx_darts &vfx_forge &vfx_static &vfx_pulse
                       &vfx_status &vfx_solid_warm
                       &vfx_color_bars>;
             default-scene = <&vfx_aurora>;
