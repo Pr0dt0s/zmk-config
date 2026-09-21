@@ -77,12 +77,13 @@ nothing useful goes there.
 
 ## Things to delete when they have served their purpose
 
-- `config/vfx-probe.dtsi` — six single-pixel scenes for identifying the
-  underglow order, plus a three-band colour check. Referenced from the channel
-  lists in both overlays.
-- The hue-reset key on the Mouse layer (`&vfx VFX_SET_HUE(0)`), which exists
-  so the colour check can be read honestly: a stored hue shift rotates all
-  three bands together and looks exactly like a wiring fault.
+- `config/vfx-probe.dtsi` — six single-pixel scenes, one per underglow LED,
+  for reading off the order of that part of the chain. Included by both
+  overlays and referenced from the glow channel's scene list in each.
+
+The per-key colour bars that used to live alongside them are gone: the
+`color-mapping` fix settled what they were there to check, and they were the
+only thing in the probe file that touched the keys channel.
 
 ## Gotchas found the hard way
 

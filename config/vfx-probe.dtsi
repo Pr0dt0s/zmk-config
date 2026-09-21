@@ -1,12 +1,16 @@
 /*
- * Temporary diagnostics.
+ * Temporary diagnostic: which of the six underglow LEDs is which.
  *
- * The per-key order is settled, so the sweep is down to the six underglow
- * pixels, whose order in the chain is still unknown. They sit on the glow
- * channel, so stepping that channel walks them one at a time.
+ * Everything else about this board's wiring is settled. These six answer to
+ * no key, so nothing about normal use reveals their order, and they are the
+ * one part of the chain still inferred rather than measured.
  *
- * Delete this file, its two #includes and the probe scenes in the channel
- * lists once the underglow order is known.
+ * Each scene lights exactly one of them. They sit on the glow channel, so
+ * stepping that channel walks them one at a time: hold the Mouse layer with
+ * right shift and press next, noting which LED comes up each time.
+ *
+ * Delete this file, its #include in both overlays, and the six probe scenes
+ * in the glow channel lists once that is written down.
  */
 
 #include <dt-bindings/zmk/vfx.h>
@@ -98,51 +102,6 @@
                 compatible = "zmk,vfx-layer-solid";
                 zone = <&vfx_probe_05_zone>;
                 color = <VFX_HSB(0, 0, 100)>;
-            };
-        };
-    };
-
-    vfx_color_zones {
-        vfx_bar_numbers_zone: vfx_bar_numbers_zone {
-            compatible = "zmk,vfx-zone";
-            range = <6 6>;
-        };
-
-        vfx_bar_qwerty_zone: vfx_bar_qwerty_zone {
-            compatible = "zmk,vfx-zone";
-            range = <12 6>;
-        };
-
-        vfx_bar_home_zone: vfx_bar_home_zone {
-            compatible = "zmk,vfx-zone";
-            range = <18 6>;
-        };
-    };
-
-    vfx_color_tests {
-        /* Red on the number row, green on QWERTY, blue on home. Reset the hue
-         * first or this lies, since a stored shift rotates all three equally.
-         */
-        vfx_color_bars: vfx_color_bars {
-            compatible = "zmk,vfx-scene";
-            display-name = "Colour Bars";
-
-            numbers {
-                compatible = "zmk,vfx-layer-solid";
-                zone = <&vfx_bar_numbers_zone>;
-                color = <VFX_HSB(0, 100, 100)>;
-            };
-
-            qwerty {
-                compatible = "zmk,vfx-layer-solid";
-                zone = <&vfx_bar_qwerty_zone>;
-                color = <VFX_HSB(120, 100, 100)>;
-            };
-
-            home {
-                compatible = "zmk,vfx-layer-solid";
-                zone = <&vfx_bar_home_zone>;
-                color = <VFX_HSB(240, 100, 100)>;
             };
         };
     };

@@ -197,8 +197,9 @@
             // reaches this layer, so it is held down throughout and can never
             // register a press of its own: nothing useful goes there.
             //
-            // Key 1 resets the hue to neutral, which the colour-bar scene
-            // needs to be read honestly. It can go with vfx-probe.dtsi.
+            // Key 1 sets the hue shift back to zero. The hue keys only step
+            // up and down and the shift is stored, so without this there is
+            // no way back to a scene's own colours once it has drifted.
             bindings = <
 &trans  &vfx VFX_SET_HUE(0)  &trans        &trans        &trans        &trans                                &trans  &trans          &trans          &trans           &trans  &vfx_tog_ch
 &trans  &bl BL_CYCLE         &vfx_spi_ch   &vfx_brd_ch   &vfx_bri_ch   &trans                                &trans  &msc SCRL_UP    &mmv MOVE_UP    &msc SCRL_DOWN   &trans  &trans

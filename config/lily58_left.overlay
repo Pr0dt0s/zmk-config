@@ -111,8 +111,7 @@
                       &vfx_reactive &vfx_water &vfx_water_keys &vfx_matrix &vfx_matrix_keys
                       &vfx_pinwheel &vfx_fire &vfx_beacons &vfx_crosshair &vfx_ember
                       &vfx_held &vfx_darts &vfx_forge &vfx_static &vfx_pulse
-                      &vfx_status &vfx_solid_warm
-                      &vfx_color_bars>;
+                      &vfx_status &vfx_solid_warm>;
             default-scene = <&vfx_aurora>;
         };
     };
