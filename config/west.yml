@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: pr0dt0s
       url-base: https://github.com/pr0dt0s
+    - name: zzeneg
+      url-base: https://github.com/zzeneg
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -18,6 +20,12 @@ manifest:
     # of this config cannot reach a private one.
     - name: zmk-advanced-underglow-effects-vfx
       remote: pr0dt0s
-      revision: claude/zealous-planck-dykzeh
+      revision: main
+    # Raw HID transport, for CONFIG_ZMK_VFX_RAW_HID: lets a host move a
+    # tuned layer's hue, level or speed live, over USB or BLE, rather than
+    # only from the keymap. See lily58_left.conf and vfx-tunable.dtsi.
+    - name: zmk-raw-hid
+      remote: zzeneg
+      revision: main
   self:
     path: config

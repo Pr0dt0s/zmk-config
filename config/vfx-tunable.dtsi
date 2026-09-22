@@ -1,0 +1,32 @@
+/*
+ * One scene with a tune-id, for trying the raw-hid host panel against real
+ * hardware: connect the simulator's Host control panel to this board and
+ * slot 1's hue, level and speed become live sliders over the glow channel's
+ * wash.
+ *
+ * Everything else in the shipped presets is used as-is, with no tune-id of
+ * its own -- adding one here rather than forking vfx_glow_pulse in the
+ * module keeps that preset itself untouched for every other board using it.
+ */
+
+#include <dt-bindings/zmk/vfx.h>
+
+/ {
+    vfx_tunable_scenes {
+        vfx_glow_pulse_tuned: vfx_glow_pulse_tuned {
+            compatible = "zmk,vfx-scene";
+            display-name = "Glow Pulse (tuned)";
+
+            wash {
+                compatible = "zmk,vfx-layer-pulse";
+                zone = <&vfx_all>;
+                color = <VFX_HSB(265, 80, 100)>;
+                decay-ms = <900>;
+                min-level = <40>;
+                hue-step = <7>;
+                stack;
+                tune-id = <1>;
+            };
+        };
+    };
+};

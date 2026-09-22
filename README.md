@@ -75,6 +75,22 @@ Position 0 of that layer is the `&lt 4` key itself. It is held down for as
 long as the layer is active and so can never register a press of its own;
 nothing useful goes there.
 
+## Host control
+
+`CONFIG_ZMK_VFX_RAW_HID=y` in `lily58_left.conf` turns on the module's
+[zzeneg/zmk-raw-hid](https://github.com/zzeneg/zmk-raw-hid) transport, and
+`build.yaml` adds `raw_hid_adapter` to the left (central) build only — the
+same restriction `CONFIG_ZMK_WPM` has, since `CONFIG_RAW_HID` refuses to
+build on a peripheral.
+
+`config/vfx-tunable.dtsi` adds one scene, `vfx_glow_pulse_tuned`, at the end
+of the glow channel's list: the same wash as `vfx_glow_pulse` with
+`tune-id = <1>` added to its one layer, so there is something live to point
+a host at without forking the preset itself. Cycle the glow channel
+(`vfx_next_ch` on the Mouse layer) to it, then connect the simulator's Host
+control panel — see that repo's README for the wire format and its own
+honest caveat that none of this has been tried on real hardware yet.
+
 ## Things to delete when they have served their purpose
 
 - `config/vfx-probe.dtsi` — six single-pixel scenes, one per underglow LED,
@@ -100,5 +116,6 @@ to be taught one way, which is what `CONFIG_ZMK_VFX_SPLIT_SYNCED=y` does.
 
 ## Building
 
-GitHub Actions builds both halves on every push; see `build.yaml`. The module
-is pinned by branch in `config/west.yml`.
+GitHub Actions builds both halves on every push; see `build.yaml`. Both
+modules — the effects engine and, for the left half, `zmk-raw-hid` — are
+pinned in `config/west.yml`.

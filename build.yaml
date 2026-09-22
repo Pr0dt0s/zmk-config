@@ -19,7 +19,10 @@
 #
 ---
 include:
+  # raw_hid_adapter only goes on the central: CONFIG_RAW_HID itself refuses
+  # to build on a peripheral, same restriction CONFIG_ZMK_WPM has, and left
+  # is central here (nothing in this config overrides that default).
   - board: nice_nano//zmk
-    shield: lily58_left
+    shield: lily58_left raw_hid_adapter
   - board: nice_nano//zmk
     shield: lily58_right

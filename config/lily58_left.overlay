@@ -7,6 +7,7 @@
  * knows fewer scenes silently clamps what the other half can ever reach.
  */
 #include "vfx-probe.dtsi"
+#include "vfx-tunable.dtsi"
 
 /*
  * PandaKB Lily58 MX RGB underglow on nice_nano, left half.
@@ -99,7 +100,8 @@
                       &vfx_breathe &vfx_solid_warm &vfx_aurora &vfx_rainbow &vfx_plasma
                       &vfx_ember
                       &vfx_probe_00 &vfx_probe_01 &vfx_probe_02
-                      &vfx_probe_03 &vfx_probe_04 &vfx_probe_05>;
+                      &vfx_probe_03 &vfx_probe_04 &vfx_probe_05
+                      &vfx_glow_pulse_tuned>;
             default-scene = <&vfx_glow_pulse>;
         };
 
