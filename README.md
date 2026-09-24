@@ -99,6 +99,13 @@ already declared. Both halves already declare two channels (glow, keys — see
 should show both without any devicetree change here. Same untested-on-real-
 hardware caveat as everything else in this section.
 
+raw-hid only reaches the left half, but the module relays a runtime-scene
+edit to the right half over the split link once it has applied it locally,
+so both halves end up showing the same thing. That relay needs somewhere to
+land: `lily58_right.conf` turns `CONFIG_ZMK_VFX_RUNTIME_SCENES` on too, for
+exactly that reason, even though the right half never runs raw-hid itself
+and so can never be the one a host is plugged into.
+
 ## Things to delete when they have served their purpose
 
 - `config/vfx-probe.dtsi` — six single-pixel scenes, one per underglow LED,
