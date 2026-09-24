@@ -91,6 +91,14 @@ a host at without forking the preset itself. Cycle the glow channel
 control panel — see that repo's README for the wire format and its own
 honest caveat that none of this has been tried on real hardware yet.
 
+`CONFIG_ZMK_VFX_RUNTIME_SCENES=y`, alongside `RAW_HID` in the same file,
+turns on the other half of that panel: the **Scenes** tab builds a channel's
+scene live, entirely at runtime, rather than only tuning a layer devicetree
+already declared. Both halves already declare two channels (glow, keys — see
+`lily58_left.overlay`/`lily58_right.overlay`), so the panel's channel tabs
+should show both without any devicetree change here. Same untested-on-real-
+hardware caveat as everything else in this section.
+
 ## Things to delete when they have served their purpose
 
 - `config/vfx-probe.dtsi` — six single-pixel scenes, one per underglow LED,
