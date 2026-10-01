@@ -15,12 +15,15 @@ manifest:
     # cannot be extended from a module: its effects are a fixed switch with
     # file-static state.
     #
+    # Tracks the runtime-scene branch (staged builds, several scenes per
+    # channel, split sync). Point it back at main once that is merged.
+    #
     # The module repository has to stay public: west clones it anonymously and
     # ZMK's reusable build workflow takes no credentials, so an Actions build
     # of this config cannot reach a private one.
     - name: zmk-advanced-underglow-effects-vfx
       remote: pr0dt0s
-      revision: main
+      revision: claude/runtime-scene-authoring
     # Raw HID transport, for CONFIG_ZMK_VFX_RAW_HID: lets a host move a
     # tuned layer's hue, level or speed live, over USB or BLE, rather than
     # only from the keymap. See lily58_left.conf and vfx-tunable.dtsi.
